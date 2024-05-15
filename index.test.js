@@ -60,13 +60,35 @@ describe('Band, Musician, and Song Models', () => {
         expect('UpdatedMusician.instrument').toBe('Guitar');
     })
 
+    test('can update a Song', async () => {
+        const updatedSong = await Song.findByPk(1);
+        updatedSong.title = "Pink Venom";
+        updatedSong.year = "2022";
+        updatedSong.length = "3";
+        await updatedSong.save();
+        expect('UpdatedSong.title').toBe('Pink Venom');
+        expect('UpdatedSong.year').toBe('2022');
+        expect('UpdatedSong.length').toBe('3'); 
+    })
+
     test('can delete a Band', async () => {
-        // TODO - test deleting a band
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const deletedBand = await Band.findByPk(1);
+        await deletedBand.destroy();
+        const band = await Band.findByPk(1);
+        expect('band').toBeNull();
     })
 
     test('can delete a Musician', async () => {
-        // TODO - test deleting a musician
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const deletedMusician = await Musician.findByPk(1);
+        await deletedMusician.destroy();
+        const musician = await Musician.findByPk(1);
+        expect('musician').toBeNull();
+    })
+
+    test('can delete a Song', async () => {
+        const deletedSong = await Song.findByPk(1);
+        await deletedSong.destroy();
+        const song = await Song.findByPk(1);
+        expect('song').toBeNull();
     })
 })
