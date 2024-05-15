@@ -13,23 +13,51 @@ describe('Band, Musician, and Song Models', () => {
     })
 
     test('can create a Band', async () => {
-        // TODO - test creating a band
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const band = await Band.create({
+            name: "Imagine Dragons", 
+            genre: "Pop"
+        })
+        expect('band.name').toBe('Imagine Dragons');
+        expect('band.genre').toBe('Pop');
     })
 
     test('can create a Musician', async () => {
-        // TODO - test creating a musician
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const musician = await Musician.create({
+            name: "Andrew Tolman",
+            instrument: "Drums"                
+        })
+        expect('musician.name').toBe('Andrew Tolman');
+        expect('musician.instrument').toBe('Drums');
+    })
+
+    test('can create a Song', async () => {
+        const song = await Song.create({
+            title: "Monster",
+            year: 2013,
+            length: 4
+        })
+        expect('song.title').toBe('Monster');
+        expect('song.year').toBe('2013');
+        expect('song.length').toBe('4');
     })
 
     test('can update a Band', async () => {
-        // TODO - test updating a band
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const updatedBand = await Band.findByPk(1);
+        updatedBand.name = "BlackPink";
+        updatedBand.genre = "KPop";
+        await updatedBand.save();
+
+        expect('UpdatedBand.name').toBe('BlackPink');
+        expect('UpdatedBand.genre').toBe('KPop');
     })
 
     test('can update a Musician', async () => {
-        // TODO - test updating a musician
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const updatedMusician = await Musician.findByPk(1);
+        updatedMusician.name = "Rose";
+        updatedMusician.instrument = "Guitar";
+        await updatedMusician.save();
+        expect('UpdatedMusician.name').toBe('Rose');
+        expect('UpdatedMusician.instrument').toBe('Guitar');
     })
 
     test('can delete a Band', async () => {
