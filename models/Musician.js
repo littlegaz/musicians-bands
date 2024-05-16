@@ -2,9 +2,9 @@ const {Sequelize, sequelize} = require('../db');
 const { DataTypes } = require('sequelize');
 
 // TODO - define the Musician model
-let Musician = sequelize("Musician", {
-    name: DataTypes.STRING,
-    instrument: DataTypes.STRING
+let Musician = sequelize.define("Musician", {
+    name: Sequelize.STRING,
+    instrument: Sequelize.STRING,
 });
 
 module.exports = {

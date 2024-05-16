@@ -3,8 +3,8 @@ const { DataTypes } = require('sequelize');
 
 // TODO - define the Band model
 let Band = sequelize.define("Band", {
-    name: DataTypes.STRING,
-    genre: DataTypes.STRING
+    name: Sequelize.STRING,
+    genre: Sequelize.STRING,
 });
 
 module.exports = {

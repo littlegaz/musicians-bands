@@ -17,8 +17,10 @@ describe('Band, Musician, and Song Models', () => {
             name: "Imagine Dragons", 
             genre: "Pop"
         })
-        expect('band.name').toBe('Imagine Dragons');
-        expect('band.genre').toBe('Pop');
+        expect(band.name).toBe("Imagine Dragons");
+        expect(band.genre).toBe("Pop");
+
+        expect(band).toBeInstanceOf(Band);
     })
 
     test('can create a Musician', async () => {
@@ -26,8 +28,8 @@ describe('Band, Musician, and Song Models', () => {
             name: "Andrew Tolman",
             instrument: "Drums"                
         })
-        expect('musician.name').toBe('Andrew Tolman');
-        expect('musician.instrument').toBe('Drums');
+        expect(musician.name).toBe('Andrew Tolman');
+        expect(musician.instrument).toBe('Drums');
     })
 
     test('can create a Song', async () => {
@@ -36,59 +38,71 @@ describe('Band, Musician, and Song Models', () => {
             year: 2013,
             length: 4
         })
-        expect('song.title').toBe('Monster');
-        expect('song.year').toBe('2013');
-        expect('song.length').toBe('4');
+        expect(song.title).toBe('Monster');
+        expect(song.year).toBe(2013);
+        expect(song.length).toBe(4);
     })
 
     test('can update a Band', async () => {
-        const updatedBand = await Band.findByPk(1);
-        updatedBand.name = "BlackPink";
-        updatedBand.genre = "KPop";
-        await updatedBand.save();
-
-        expect('UpdatedBand.name').toBe('BlackPink');
-        expect('UpdatedBand.genre').toBe('KPop');
+        const band = await Band.create({
+            name: "Imagine Dragons", 
+            genre: "Pop"
+        });
+            await band.update({
+            name: "BlackPink",
+            genre: "KPop",
+        });
+        expect(band.name).toBe('BlackPink');
+        expect(band.genre).toBe('KPop');
     })
 
     test('can update a Musician', async () => {
-        const updatedMusician = await Musician.findByPk(1);
-        updatedMusician.name = "Rose";
-        updatedMusician.instrument = "Guitar";
-        await updatedMusician.save();
-        expect('UpdatedMusician.name').toBe('Rose');
-        expect('UpdatedMusician.instrument').toBe('Guitar');
+        const musician = await Musician.create({
+            name: "Andrew Tolman",
+            instrument: "Drums" 
+        });
+            await musician.update({
+            name: "Rose",
+            instrument: "Guitar",
+        });    
+        expect(musician.name).toBe('Rose');
+        expect(musician.instrument).toBe('Guitar');
     })
 
     test('can update a Song', async () => {
-        const updatedSong = await Song.findByPk(1);
-        updatedSong.title = "Pink Venom";
-        updatedSong.year = "2022";
-        updatedSong.length = "3";
-        await updatedSong.save();
-        expect('UpdatedSong.title').toBe('Pink Venom');
-        expect('UpdatedSong.year').toBe('2022');
-        expect('UpdatedSong.length').toBe('3'); 
+        const song = await Song.create({
+            title: "Monster",
+            year: 2013,
+            length: 4
+        });
+            await song.update({
+            title: "Pink Venom",
+            year: 2022,
+            length: 3,
+        });
+        expect(song.title).toBe('Pink Venom');
+        expect(song.year).toBe(2022);
+        expect(song.length).toBe(3); 
     })
 
     test('can delete a Band', async () => {
         const deletedBand = await Band.findByPk(1);
         await deletedBand.destroy();
         const band = await Band.findByPk(1);
-        expect('band').toBeNull();
+        expect(band).toBeNull();
     })
 
     test('can delete a Musician', async () => {
         const deletedMusician = await Musician.findByPk(1);
         await deletedMusician.destroy();
         const musician = await Musician.findByPk(1);
-        expect('musician').toBeNull();
+        expect(musician).toBeNull();
     })
 
     test('can delete a Song', async () => {
         const deletedSong = await Song.findByPk(1);
         await deletedSong.destroy();
         const song = await Song.findByPk(1);
-        expect('song').toBeNull();
+        expect(song).toBeNull();
     })
 })
